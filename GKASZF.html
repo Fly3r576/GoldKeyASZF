@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goldkey Airsoft - Interaktív ÁSZF</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Tactical Neutral -->
+    <!-- Application Structure Plan: A tab-based single-page application. This structure breaks the dense legal document into logical, user-friendly sections (Overview, Prices, Rules, Minors, Legal). Users can quickly navigate to the information they need, such as prices or safety rules, without scrolling through a long text. This non-linear, task-oriented approach enhances usability and makes the information more accessible and less intimidating for potential players. -->
+    <!-- Visualization & Content Choices: Key information is presented using visually distinct cards (for pricing), icon-based lists (for rules), and clear typographic hierarchy to improve readability. Complex sections like liability are summarized and placed under an accordion-style component to reduce clutter, allowing users to access details on demand. This approach transforms the static legal text into an interactive, easily digestible format, prioritizing clarity and user experience. No charts are needed as the source is purely textual/legal. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f1ea;
+            color: #2c3e50;
+        }
+        .tab-btn {
+            transition: all 0.3s ease;
+            border-bottom: 4px solid transparent;
+        }
+        .tab-btn.active {
+            color: #d35400;
+            border-bottom-color: #d35400;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .accordion-header {
+            cursor: pointer;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-5xl">
+
+        <header class="text-center mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-800">Goldkey Airsoft</h1>
+            <p class="text-lg text-gray-600 mt-2">Interaktív Általános Szerződési Feltételek</p>
+        </header>
+
+        <div class="bg-white rounded-xl shadow-lg p-2 mb-8 sticky top-2 z-10">
+            <nav id="tabs" class="flex flex-wrap justify-center space-x-2 md:space-x-4">
+                <button data-tab="tab-overview" class="tab-btn active font-semibold py-2 px-3 md:px-4 text-sm md:text-base">Áttekintés</button>
+                <button data-tab="tab-pricing" class="tab-btn font-semibold py-2 px-3 md:px-4 text-sm md:text-base">Árak és Fizetés</button>
+                <button data-tab="tab-rules" class="tab-btn font-semibold py-2 px-3 md:px-4 text-sm md:text-base">Szabályok</button>
+                <button data-tab="tab-minors" class="tab-btn font-semibold py-2 px-3 md:px-4 text-sm md:text-base">Kiskorúak</button>
+                <button data-tab="tab-legal" class="tab-btn font-semibold py-2 px-3 md:px-4 text-sm md:text-base">Jogi Információk</button>
+            </nav>
+        </div>
+
+        <main id="tab-contents">
+            
+            <div id="tab-overview" class="tab-content active">
+                <div class="card p-6 md:p-8">
+                    <h2 class="text-2xl font-bold mb-4 text-gray-800">Üdvözlünk a Goldkey Airsoftnál!</h2>
+                    <p class="mb-6 text-gray-600">Ez az interaktív útmutató segít megérteni a játékainkon való részvétel feltételeit. Célunk, hogy mindenki számára biztonságos és élvezetes élményt nyújtsunk. Kérjük, ismerkedj meg a legfontosabb információkkal, mielőtt csatlakoznál hozzánk!</p>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h3 class="font-bold text-lg mb-2 text-d35400">📍 Helyszín</h3>
+                            <p class="text-gray-700">6320 Solt, Bartók Béla u. 2.</p>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h3 class="font-bold text-lg mb-2 text-d35400">📞 Kapcsolat</h3>
+                            <p class="text-gray-700">📧 airsoft@goldkey.hu</p>
+                            <p class="text-gray-700">📱 +36 20 396 9918</p>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg md:col-span-2">
+                             <h3 class="font-bold text-lg mb-2 text-d35400">💡 A legfontosabb tudnivalók</h3>
+                             <ul class="list-disc list-inside space-y-2 text-gray-700">
+                                <li>A részvételhez **szemvédelem** kötelező.</li>
+                                <li>A játékokon **14 éves kortól** lehet részt venni.</li>
+                                <li>A fizetés a helyszínen, **készpénzben** történik.</li>
+                                <li>A játékvezetői utasítások betartása mindenki számára kötelező.</li>
+                             </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tab-pricing" class="tab-content">
+                <div class="text-center mb-6">
+                    <h2 class="text-2xl font-bold text-gray-800">Árak és Csomagok</h2>
+                    <p class="text-gray-600">Válassz a neked megfelelő opciók közül.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="card p-6 text-center flex flex-col">
+                        <h3 class="text-xl font-bold mb-2 text-gray-800">Nyílt Játék</h3>
+                        <p class="text-3xl font-bold my-4 text-d35400">5.000 Ft<span class="text-lg font-normal text-gray-500"> / fő</span></p>
+                        <p class="text-gray-600 flex-grow">Egész napos részvétel a meghirdetett nyílt játékainkon.</p>
+                        <p class="text-sm text-gray-500 mt-4">Saját felszereléssel rendelkezőknek.</p>
+                    </div>
+                    <div class="card p-6 text-center flex flex-col">
+                        <h3 class="text-xl font-bold mb-2 text-gray-800">Felszerelés Bérlés</h3>
+                        <p class="text-3xl font-bold my-4 text-d35400">4.000 Ft<span class="text-lg font-normal text-gray-500"> / fő</span></p>
+                        <ul class="text-left list-disc list-inside text-gray-600 flex-grow">
+                            <li>Fegyverreplika</li>
+                            <li>Teljes arcot védő maszk</li>
+                            <li>2000 db BB lövedék</li>
+                        </ul>
+                         <p class="text-sm text-gray-500 mt-4">Nyílt játékokhoz.</p>
+                    </div>
+                    <div class="card p-6 text-center flex flex-col lg:col-span-1 md:col-span-2">
+                        <h3 class="text-xl font-bold mb-2 text-gray-800">Privát Játék</h3>
+                        <p class="text-3xl font-bold my-4 text-d35400">5.000 Ft<span class="text-lg font-normal text-gray-500"> / fő</span></p>
+                        <p class="text-gray-600 flex-grow">Délutáni privát játékok baráti társaságoknak, csapatépítőkre.</p>
+                        <p class="text-sm text-gray-500 mt-4">Az ár a teljes felszerelést tartalmazza.</p>
+                    </div>
+                </div>
+                 <div class="card p-6 mt-6">
+                    <h3 class="font-bold text-lg mb-2 text-gray-800">Fizetési és Lemondási Információk</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>A fizetés a játékok előtt, a helyszínen, kizárólag **készpénzben** lehetséges.</li>
+                        <li>Szolgáltatásunkat csak **magánszemélyek** vehetik igénybe.</li>
+                        <li>A részvétel lemondása a játék kezdetéig **díjmentes**.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="tab-rules" class="tab-content">
+                <div class="text-center mb-6">
+                    <h2 class="text-2xl font-bold text-gray-800">Biztonsági és Játékszabályok</h2>
+                    <p class="text-gray-600">A biztonságos és sportszerű játékért.</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="card p-6">
+                        <h3 class="font-bold text-lg mb-4 text-green-600">✅ Kötelező</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <span class="text-2xl mr-3">👁️</span>
+                                <div><span class="font-semibold">Szemvédelem:</span> A játékterületen a szemvédelem viselése folyamatosan kötelező. Nincs kivétel!</div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-2xl mr-3">👨‍⚖️</span>
+                                <div><span class="font-semibold">Játékvezetői utasítások:</span> A játékvezető szava szent. Az utasításait kötelező betartani.</div>
+                            </li>
+                             <li class="flex items-start">
+                                <span class="text-2xl mr-3">🤕</span>
+                                <div><span class="font-semibold">Sérülés jelentése:</span> Bármilyen sérülést azonnal jelezni kell a szervezőknek.</div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card p-6">
+                        <h3 class="font-bold text-lg mb-4 text-red-600">🚫 Szigorúan Tilos</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <span class="text-2xl mr-3">💥</span>
+                                <div><span class="font-semibold">Vaktában lövés:</span> Célzott lövéseket adj le, soha ne lőj vaktában!</div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-2xl mr-3">👊</span>
+                                <div><span class="font-semibold">Fizikai kontaktus:</span> Bármilyen fizikai érintkezés, dulakodás tilos.</div>
+                            </li>
+                             <li class="flex items-start">
+                                <span class="text-2xl mr-3">🍻</span>
+                                <div><span class="font-semibold">Alkohol/Drog:</span> A játék előtt és alatt tilos tudatmódosító szerek használata.</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card p-6 mt-6 bg-yellow-50 border border-yellow-200">
+                    <div class="flex items-center">
+                        <span class="text-3xl mr-4">⚠️</span>
+                        <div>
+                            <h3 class="font-bold text-lg text-yellow-800">Szabályszegés Következménye</h3>
+                            <p class="text-yellow-700">A fenti szabályok bármelyikének megszegése a játékból való azonnali kizárást vonja maga után, pénz-visszatérítés nélkül.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tab-minors" class="tab-content">
+                 <div class="text-center mb-6">
+                    <h2 class="text-2xl font-bold text-gray-800">Kiskorúak Részvétele</h2>
+                    <p class="text-gray-600">Fontos információk 18 év alatti játékosoknak és szüleiknek.</p>
+                </div>
+                <div class="card p-6 md:p-8">
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="font-bold text-lg mb-2">Életkori Kategóriák</h3>
+                            <div class="space-y-4">
+                                <div class="p-4 rounded-lg bg-red-50 border border-red-200">
+                                    <p class="font-bold text-red-700">14 év alatt</p>
+                                    <p class="text-red-600">Részvétel nem lehetséges.</p>
+                                </div>
+                                <div class="p-4 rounded-lg bg-yellow-50 border border-yellow-200">
+                                    <p class="font-bold text-yellow-700">14-16 év között</p>
+                                    <p class="text-yellow-600">Szülői nyilatkozat ÉS folyamatos szülői/gondviselői felügyelet szükséges a helyszínen.</p>
+                                </div>
+                                <div class="p-4 rounded-lg bg-green-50 border border-green-200">
+                                    <p class="font-bold text-green-700">16-18 év között</p>
+                                    <p class="text-green-600">Csak szülői nyilatkozat szükséges, felügyelet nem kötelező.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg mb-2">Szülői Hozzájáruló Nyilatkozat</h3>
+                            <p class="text-gray-600 mb-4">A nyilatkozatot nyomtatva, kitöltve és aláírva kell bemutatni a regisztrációnál. Enélkül a kiskorú nem vehet részt a játékban.</p>
+                            <div class="bg-gray-100 p-4 rounded-lg border border-gray-200">
+                                <h4 class="font-semibold mb-2">A nyilatkozat kötelező tartalma:</h4>
+                                <ul class="list-disc list-inside space-y-1 text-gray-700">
+                                    <li>Szülő/gyám teljes neve</li>
+                                    <li>Kiskorú résztvevő neve és születési dátuma</li>
+                                    <li>Az alábbi nyilatkozatszöveg:</li>
+                                    <li class="list-none ml-4 my-2 p-2 bg-white rounded italic text-sm">"Gyermekem airsoft játékon való részvételéhez hozzájárulok. Kijelentem, hogy gyermekem egészséges, fizikailag terhelhető. Jelen hozzájárulásomat az airsoft sport jellemzőinek ismeretében adtam ki. Gyermekem airsoft játékban való részvételéért a szervezőket felelősség nem terheli."</li>
+                                    <li>Dátum és a szülő/gyám aláírása</li>
+                                    <li>14-16 év között: a felügyeletet ellátó felnőtt kísérő neve.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="mt-6 bg-blue-50 border border-blue-200 p-4 rounded-lg">
+                        <h3 class="font-bold text-lg text-blue-800">Felelősség a felügyeletért</h3>
+                        <p class="text-blue-700">A kiskorú résztvevőért és a szabályok betartásáért a játék teljes ideje alatt a szülő/gondviselő vagy az általa írásban megbízott felnőtt kísérő felel. A Goldkey Airsoft felügyeleti felelősséget nem vállal.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tab-legal" class="tab-content">
+                <div class="text-center mb-6">
+                    <h2 class="text-2xl font-bold text-gray-800">Jogi és Egyéb Információk</h2>
+                    <p class="text-gray-600">Felelősségvállalás, adatkezelés és panaszkezelés.</p>
+                </div>
+                <div class="space-y-4">
+                    <div class="card">
+                        <div class="accordion-header p-4 flex justify-between items-center">
+                            <h3 class="font-bold text-lg text-gray-800">Felelősség Korlátozása és Kártérítés</h3>
+                            <span class="text-2xl transform transition-transform duration-300">▼</span>
+                        </div>
+                        <div class="accordion-content px-4 pb-4">
+                            <div class="border-t pt-4 text-gray-600 space-y-2">
+                                <p><span class="font-semibold">A Résztvevő tudomásul veszi,</span> hogy az airsoft egy kockázatos tevékenység. A részvétel saját felelősségre történik.</p>
+                                <p><span class="font-semibold">A Szolgáltató nem felel</span> a Résztvevő figyelmetlenségéből, szabályszegésből, vagy vis maior eseményből eredő sérülésekért és károkért.</p>
+                                <p><span class="font-semibold">A Résztvevő felel</span> az általa harmadik félnek vagy a bérelt felszerelésben okozott károkért.</p>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="card">
+                        <div class="accordion-header p-4 flex justify-between items-center">
+                            <h3 class="font-bold text-lg text-gray-800">Adatkezelés (GDPR)</h3>
+                            <span class="text-2xl transform transition-transform duration-300">▼</span>
+                        </div>
+                        <div class="accordion-content px-4 pb-4">
+                             <div class="border-t pt-4 text-gray-600 space-y-2">
+                                <p>Személyes adataidat a GDPR előírásainak megfelelően kezeljük. A részvétellel elfogadod az Adatkezelési Tájékoztatónkat.</p>
+                                <p>A részletes Adatkezelési Tájékoztató a weboldalon vagy a helyszínen érhető el.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="accordion-header p-4 flex justify-between items-center">
+                            <h3 class="font-bold text-lg text-gray-800">Panaszkezelés és Jogorvoslat</h3>
+                             <span class="text-2xl transform transition-transform duration-300">▼</span>
+                        </div>
+                        <div class="accordion-content px-4 pb-4">
+                             <div class="border-t pt-4 text-gray-600 space-y-2">
+                                <p>Panaszodat jelezheted szóban a helyszínen, vagy írásban az <a href="mailto:airsoft@goldkey.hu" class="text-d35400 hover:underline">airsoft@goldkey.hu</a> címen.</p>
+                                <p>Jogvita esetén a Bács-Kiskun Vármegyei Békéltető Testülethez, a Fogyasztóvédelmi Hatósághoz, vagy bírósághoz fordulhatsz.</p>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="card">
+                        <div class="accordion-header p-4 flex justify-between items-center">
+                            <h3 class="font-bold text-lg text-gray-800">Szolgáltató Adatai</h3>
+                             <span class="text-2xl transform transition-transform duration-300">▼</span>
+                        </div>
+                        <div class="accordion-content px-4 pb-4">
+                             <div class="border-t pt-4 text-gray-600 space-y-1">
+                                <p><span class="font-semibold">Név:</span> Nun Mihály Egyéni Vállalkozó</p>
+                                <p><span class="font-semibold">Székhely:</span> 6320 Solt, Zöldfa u. 26.</p>
+                                <p><span class="font-semibold">Adószám:</span> 68598949-1-23</p>
+                                <p><span class="font-semibold">Bankszámlaszám:</span> HU33 5170 0447 1700 0181 0000 0000</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+    </div>
+
+    <script>
+        const tabs = document.getElementById('tabs');
+        const contents = document.getElementById('tab-contents');
+
+        tabs.addEventListener('click', e => {
+            if (e.target.classList.contains('tab-btn')) {
+                const tabId = e.target.dataset.tab;
+
+                tabs.querySelectorAll('.tab-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                e.target.classList.add('active');
+
+                contents.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                document.getElementById(tabId).classList.add('active');
+            }
+        });
+
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const content = header.nextElementSibling;
+                const icon = header.querySelector('span');
+                
+                header.parentElement.classList.toggle('open');
+                icon.classList.toggle('rotate-180');
+
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                }
+            });
+        });
+        
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                d35400: '#d35400',
+              }
+            }
+          }
+        }
+    </script>
+
+</body>
+</html>
